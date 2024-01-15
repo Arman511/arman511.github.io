@@ -1,16 +1,17 @@
-import './style.css';
-import * as THREE from 'three';
+import "./style.css";
+import * as THREE from "three";
 
 // Setup
-
 const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
+  canvas: document.querySelector("#background"),
 });
-
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.setZ(30);
@@ -28,52 +29,46 @@ scene.add(torus);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5, 5, 5);
-
 const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add(pointLight, ambientLight);
-
-// Helpers
-
-// const lightHelper = new THREE.PointLightHelper(pointLight)
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper)
-
-// const controls = new OrbitControls(camera, renderer.domElement);
+scene.add(ambientLight);
 
 function addStar() {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
   const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
+  const pointLight = new THREE.PointLight(0xffffff, 10);
 
   const [x, y, z] = Array(3)
     .fill()
     .map(() => THREE.MathUtils.randFloatSpread(100));
-
+  pointLight.position.set(x, y, z);
   star.position.set(x, y, z);
   scene.add(star);
+  scene.add(pointLight);
 }
 
 Array(200).fill().forEach(addStar);
 
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load('images/space.jpg');
+const spaceTexture = new THREE.TextureLoader().load("images/space.jpg");
 scene.background = spaceTexture;
 
 // Avatar
 
-const armanTexture = new THREE.TextureLoader().load('images/arman.jpg');
+const armanTexture = new THREE.TextureLoader().load("images/arman.jpg");
 
-const arman = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: armanTexture }));
+const arman = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3),
+  new THREE.MeshBasicMaterial({ map: armanTexture })
+);
 
 scene.add(arman);
 
 // Moon
 
-const marsTexture = new THREE.TextureLoader().load('images/mars.jpg');
-const normalTexture = new THREE.TextureLoader().load('images/marsNormal.jpg');
+const marsTexture = new THREE.TextureLoader().load("images/mars.jpg");
+const normalTexture = new THREE.TextureLoader().load("images/marsNormal.jpg");
 
 const mars = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
