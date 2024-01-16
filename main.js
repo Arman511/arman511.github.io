@@ -23,6 +23,9 @@ camera.position.setZ(30);
 camera.position.setX(-3);
 renderer.render(scene, camera);
 
+camera.position.z = 30;
+camera.position.x = -3;
+
 const screenSizeChange = () => {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -31,6 +34,7 @@ const screenSizeChange = () => {
   renderer.render(scene, camera);
 };
 window.addEventListener("resize", screenSizeChange);
+screenSizeChange();
 
 const createStar = () => {
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
@@ -141,7 +145,5 @@ function animate() {
 
   frameCount++;
 }
-
-animate();
 
 animate();
