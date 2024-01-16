@@ -133,8 +133,8 @@ function animate() {
 
     mars.rotation.x += 0.005;
 
-    arman.rotation.y += 0.001;
-    arman.rotation.z += 0.001;
+    arman.rotation.y += 0.01;
+    arman.rotation.z += 0.01;
 
     renderer.render(scene, camera);
   }
