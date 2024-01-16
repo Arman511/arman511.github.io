@@ -78,7 +78,7 @@ scene.add(arman);
 // Moon
 
 const marsTexture = new THREE.TextureLoader().load("images/mars.jpg");
-const normalTexture = new THREE.TextureLoader().load("images/marsNormal.jpg");
+const normalTexture = new THREE.TextureLoader().load("images/marsNormal.png");
 
 const mars = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
